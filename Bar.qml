@@ -17,9 +17,28 @@ Scope {
             }
 
             implicitHeight: 20
+            color: "#1e1e1e"
 
-            ClockWidget {
-                anchors.centerIn: parent
+            Item {
+                anchors.fill: parent
+
+                WorkspaceWidget {
+                    anchors {
+                        left: parent.left
+                        leftMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                }
+                Row {
+                    anchors {
+                        right: parent.right
+                        rightMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                    spacing: 15
+
+                    ClockWidget { }
+                }
             }
         }
     }
