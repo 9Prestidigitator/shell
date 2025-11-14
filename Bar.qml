@@ -16,12 +16,14 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 20
+            height: 32
             color: "#1e1e1e"
 
+            // Main container - uses Row for left/right layout
             Item {
                 anchors.fill: parent
 
+                // Left side - Workspaces
                 WorkspaceWidget {
                     anchors {
                         left: parent.left
@@ -29,6 +31,8 @@ Scope {
                         verticalCenter: parent.verticalCenter
                     }
                 }
+
+                // Right side - Clock (and other widgets)
                 Row {
                     anchors {
                         right: parent.right
@@ -37,7 +41,10 @@ Scope {
                     }
                     spacing: 15
 
-                    ClockWidget { }
+                    // You can add more widgets here before the clock
+                    // SystemTray { }
+
+                    ClockWidget {}
                 }
             }
         }
