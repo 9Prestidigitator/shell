@@ -22,17 +22,6 @@ Scope {
             // Main container - uses Row for left/right layout
             Item {
                 anchors.fill: parent
-
-                // Left side - Workspaces
-                WorkspaceWidget {
-                    anchors {
-                        left: parent.left
-                        leftMargin: 10
-                        verticalCenter: parent.verticalCenter
-                    }
-                }
-
-                // Right side - Clock (and other widgets)
                 Row {
                     anchors {
                         right: parent.right
@@ -44,7 +33,9 @@ Scope {
                     // You can add more widgets here before the clock
                     // SystemTray { }
 
-                    ClockWidget {}
+                    ClockWidget {
+                        color: "#C4E9F1"
+                    }
                 }
             }
         }
