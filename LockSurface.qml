@@ -48,7 +48,7 @@ Rectangle {
 
 	ColumnLayout {
 		// Uncommenting this will make the password entry invisible except on the active monitor.
-		// visible: Window.active
+		visible: Window.active
 
 		anchors {
 			horizontalCenter: parent.horizontalCenter
