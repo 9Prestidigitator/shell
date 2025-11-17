@@ -12,45 +12,26 @@ const windowIconConfig = {
     
     // Pattern matching rules (regex pattern -> icon character)
     patterns: [
-        // Browsers
-        { pattern: /firefox/i, icon: "F" },
-        { pattern: /chrome|chromium/i, icon: "C" },
-        { pattern: /brave/i, icon: "B" },
-        
-        // Terminals
-        { pattern: /kitty/i, icon: "K" },
-        { pattern: /alacritty/i, icon: "A" },
-        { pattern: /wezterm/i, icon: "W" },
-        { pattern: /terminal/i, icon: "T" },
-        
-        // Editors
-        { pattern: /vim|nvim|neovim/i, icon: "V" },
-        { pattern: /emacs/i, icon: "E" },
+        // GUI
+        { pattern: /firefox/i, icon: "" },
+        { pattern: /brave/i, icon: "󰞀" },
+        { pattern: /chrome|chromium/i, icon: "" },
+        { pattern: /discord/i, icon: "" },
+        { pattern: /steam/i, icon: "" },
         { pattern: /code|vscode/i, icon: "↯" },
-        
-        // Communication
-        { pattern: /discord/i, icon: "D" },
-        { pattern: /slack/i, icon: "S" },
-        { pattern: /telegram/i, icon: "⚡" },
-        
-        // Media
         { pattern: /spotify/i, icon: "♫" },
-        { pattern: /mpv/i, icon: "▶" },
+        { pattern: /mpv/i, icon: "" },
+        { pattern: /git/i, icon: "" },
+        { pattern: /docker/i, icon: "" },
+        { pattern: /nautilus|files/i, icon: "" },
+        { pattern: /dolphin/i, icon: "󱢴" },
+        { pattern: /guitarpro/i, icon: "󰋅" },
         
-        // Development
-        { pattern: /git/i, icon: "G" },
-        { pattern: /docker/i, icon: "🐳" },
-        
-        // File managers
-        { pattern: /nautilus|files/i, icon: "📁" },
-        { pattern: /thunar/i, icon: "📂" },
-        
-        // Quickshell
-        { pattern: /quickshell/i, icon: "Q" },
-        
-        // System
-        { pattern: /htop|btop/i, icon: "%" },
-        { pattern: /settings/i, icon: "⚙" },
+        // CLI/TUI
+        { pattern: /emacs/i, icon: "" },
+        { pattern: /kitty/i, icon: "󰄛" },
+        { pattern: /alacritty/i, icon: "" },
+        { pattern: /vim|nvim|neovim|Neovim/i, icon: "" },
     ]
 };
 

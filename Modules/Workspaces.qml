@@ -92,7 +92,7 @@ Item {
                             font.bold: true
 
                             // Orange if focused, blue if inactive
-                            color: modelData.isFocused ? "#fb923c" : "#3b82f6"
+                            color: modelData.isFocused ? "white" : "#453f3b"
 
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
