@@ -22,7 +22,7 @@ Variants {
         Image {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: Qt.resolvedUrl(Quickshell.shellPath("image.png"))
+            source: Qt.resolvedUrl(Quickshell.shellPath("assets/image.png"))
         }
     }
 }
