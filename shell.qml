@@ -4,7 +4,9 @@ import QtQuick
 import qs.Modules
 
 Scope {
-    Bar {}
+    Bar {
+        id: bar
+    }
     Background {}
     LockScreen {
         id: lockscreen
@@ -17,6 +19,11 @@ Scope {
             function toggleLock(): void {
                 console.log("Lockscreen toggled");
                 lockscreen.locked = true;
+            }
+
+            function toggleBar(): void {
+                console.log("Toggle bar");
+                bar.barVisible = bar.barVisible ? false : true;
             }
         }
     }

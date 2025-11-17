@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Layouts
 
 Scope {
+    property bool barVisible: true
     Variants {
         model: Quickshell.screens
 
@@ -21,6 +22,15 @@ Scope {
             }
 
             color: "transparent"
+
+            visible: barVisible ? true : false
+
+            Behavior on visible {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
 
             WlrLayershell.layer: WlrLayer.Top
             mask: Region {
