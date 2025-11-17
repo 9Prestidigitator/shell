@@ -131,48 +131,47 @@ Singleton {
         // THIS NEEDS WORK
         if (event.WindowOpenedOrChanged) {
             const winData = event.WindowOpenedOrChanged.window;
-
+            
             const oldWindow = windows[winData.id];
             const windowMoved = oldWindow && oldWindow.workspaceId !== winData.workspace_id;
-
-            // Remove from old workspace if needed
-            if (oldWindow) {
-                const oldWorkspacesId = oldWindow.workspaceId;
-                if (workspaces[oldWorkspacesId]) {
-                    workspaces[oldWorkspacesId].windows = workspaces[oldWorkspacesId].windows.filter(w => w.id !== winData.id);
-                }
-            }
-
+            
+            // Create new window object
             const window = {
                 id: winData.id,
                 title: winData.title,
                 appId: winData.app_id,
-                pid: winData.pid,
                 workspaceId: winData.workspace_id,
-                isFocused: winData.is_focused,
-                isFloating: winData.is_floating
+                isFocused: winData.is_focused
             };
-            // Update window in global map
+            
+            // Update global windows map
             windows[winData.id] = window;
-
-            // Add to new workspace
-            if (workspaces[winData.workspace_id]) {
-                // Deduplication
-                workspaces[winData.workspace_id].windows = workspaces[winData.workspace_id].windows.filter(w => w.id !== winData.id);
-                // Add to end of workspace window list
-                workspaces[winData.workspace_id].windows.push(window);
+            
+            // Remove from ALL workspaces first (clean slate)
+            for (let wsId in workspaces) {
+                workspaces[wsId].windows = workspaces[wsId].windows.filter(w => w.id !== winData.id);
             }
-
+            
+            // Add to the correct workspace
+            if (workspaces[winData.workspace_id]) {
+                workspaces[winData.workspace_id].windows.push(window);
+                // Create new array reference to trigger QML update
+                workspaces[winData.workspace_id] = {
+                    ...workspaces[winData.workspace_id],
+                    windows: [...workspaces[winData.workspace_id].windows]
+                };
+            }
+            
             if (winData.is_focused) {
                 focusedWindowId = winData.id;
             }
-
+            
             if (windowMoved) {
                 windowMoved(winData.id, winData.workspace_id);
             } else {
                 windowAdded(winData.id, window);
             }
-
+            
             updateSortedWorkspacesList();
         }
 
