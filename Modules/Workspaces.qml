@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.Services
+import "file:///home/max/.config/quickshell/Config/window-icons.js" as IconConfig
 
 Item {
     id: root
@@ -12,6 +13,11 @@ Item {
     property int spacing: 3
     property int windowSpacing: 3
     property int padding: 1
+
+    property var iconConfig: IconConfig.windowIconConfig
+    function getWindowIcon(title) {
+        return IconConfig.getIconForWindow(title);
+    }
 
     Column {
         id: layout
@@ -55,26 +61,78 @@ Item {
                     Repeater {
                         model: modelData.windows
 
-                        Rectangle {
+                        // Rectangle {
+                        //     width: root.windowSize
+                        //     height: root.windowSize
+                        //     radius: root.windowSize / 2
+                        //     anchors.horizontalCenter: parent.horizontalCenter
+                        //
+                        //     color: modelData.isFocused ? "orange" : "blue"
+                        //     border.color: "transparent"
+                        //     border.width: 1
+                        //
+                        //     Behavior on color {
+                        //         ColorAnimation {
+                        //             duration: 200
+                        //             easing.type: Easing.InOutQuad
+                        //         }
+                        //     }
+                        // }
+                        // Window icon text
+                        Text {
                             width: root.windowSize
                             height: root.windowSize
-                            radius: root.windowSize / 2
                             anchors.horizontalCenter: parent.horizontalCenter
 
-                            color: modelData.isFocused ? "orange" : "blue"
-                            border.color: "transparent"
-                            border.width: 1
+                            text: root.getWindowIcon(modelData.title)
 
+                            // Font styling from config
+                            font.family: root.iconConfig.fontFamily
+                            font.pixelSize: root.iconConfig.fontSize
+                            font.bold: true
+
+                            // Orange if focused, blue if inactive
+                            color: modelData.isFocused ? "#fb923c" : "#3b82f6"
+
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+
+                            // Smooth color transitions
                             Behavior on color {
                                 ColorAnimation {
-                                    duration: 200
+                                    duration: 150
                                     easing.type: Easing.InOutQuad
                                 }
                             }
                         }
                     }
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: {
+                        Quickshell.execDetached(["niri", "msg", "action", "focus-workspace", modelData.idx]);
+                    }
+                }
             }
+        }
+    }
+    // Show loading state
+    Rectangle {
+        anchors.centerIn: parent
+        width: root.workspaceSize
+        height: root.workspaceSize
+        radius: 6
+        color: "#444444"
+        visible: !Niri.initialized
+
+        Text {
+            anchors.centerIn: parent
+            text: "..."
+            color: "#888888"
+            font.pixelSize: 16
         }
     }
 }
