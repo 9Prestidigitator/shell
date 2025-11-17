@@ -15,10 +15,10 @@ Rectangle {
         source: Qt.resolvedUrl(Quickshell.shellPath("assets/image.jpg"))
     }
 
-    Button {
-        text: "Its not working, let me out"
-        onClicked: context.unlocked()
-    }
+    // Button {
+    //     text: "Its not working, let me out"
+    //     onClicked: context.unlocked()
+    // }
 
     Label {
         id: clock
