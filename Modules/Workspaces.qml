@@ -9,10 +9,10 @@ Item {
     implicitWidth: workspaceSize + 16
     implicitHeight: layout.implicitHeight
 
-    property int workspaceSize: 16
-    property int windowSize: 16
-    property int spacing: 3
-    property int windowSpacing: 3
+    property int workspaceSize: 20
+    property int windowSize: 20
+    property int spacing: 5
+    property int windowSpacing: 2
     property int padding: 1
 
     property var iconConfig: IconConfig.windowIconConfig
@@ -33,11 +33,12 @@ Item {
             Rectangle {
                 id: workspaceBlock
                 width: root.workspaceSize
-                height: Math.max(root.workspaceSize, windowColumn.height + 12)
+                height: Math.max(root.workspaceSize, windowColumn.height + 10)
                 radius: 16
 
-                color: modelData.isActive ? "red" : "green"
-                border.color: modelData.isFocused ? "#ffffff" : "transparent"
+                opacity: modelData.windows.length > 0 ? 1 : 0
+                color: modelData.isActive ? "#798991" : "#5C696F"
+                border.color: "transparent"
                 border.width: 2
 
                 Behavior on color {
@@ -62,40 +63,41 @@ Item {
                     Repeater {
                         model: modelData.windows
 
-                        Text {
-                            width: root.windowSize
+                        Item {
+                            id: windowBlock
+                            width: root.workspaceSize
                             height: root.windowSize
 
-                            anchors.horizontalCenter: parent.horizontalCenter
+                            Text {
+                                width: parent.width
+                                height: parent.height
+                                // Offset from config logo
+                                x: root.getWindowIcon(modelData.appId, modelData.isUrgent)[1]
 
-                            text: root.getWindowIcon(modelData.title, modelData.isUrgent)
+                                text: root.getWindowIcon(modelData.appId, modelData.isUrgent)[0]
 
-                            // Font styling from config
-                            font.family: root.iconConfig.fontFamily
-                            font.pixelSize: root.iconConfig.fontSize
-                            font.bold: false
+                                font.family: root.iconConfig.fontFamily
+                                font.pixelSize: root.iconConfig.fontSize
+                                font.bold: false
 
-                            // Orange if focused, blue if inactive
-                            color: modelData.isFocused ? "white" : "#453f3b"
+                                color: modelData.isFocused ? "white" : "#453f3b"
 
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-
-                            // Smooth color transitions
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: 150
-                                    easing.type: Easing.InOutQuad
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: 150
+                                        easing.type: Easing.InOutQuad
+                                    }
                                 }
                             }
-
                             MouseArea {
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
 
                                 onClicked: {
-                                    Quickshell.execDetached(["niri", "msg", "action", "focus-window", modelData.idx]);
+                                    Quickshell.execDetached(["niri", "msg", "action", "focus-window", "--id", modelData.id]);
                                 }
                             }
                         }
@@ -104,7 +106,6 @@ Item {
             }
         }
     }
-    // Show loading state
     Rectangle {
         anchors.centerIn: parent
         width: root.workspaceSize
@@ -117,7 +118,7 @@ Item {
             anchors.centerIn: parent
             text: "..."
             color: "#888888"
-            font.pixelSize: 16
+            font.pixelSize: 12
         }
     }
 }

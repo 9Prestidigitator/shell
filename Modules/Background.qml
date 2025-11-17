@@ -11,6 +11,7 @@ Variants {
         screen: modelData
 
         WlrLayershell.layer: WlrLayer.Background
+        WlrLayershell.exclusiveZone: -1
 
         anchors {
             top: true
@@ -22,7 +23,7 @@ Variants {
         Image {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: Qt.resolvedUrl(Quickshell.shellPath("assets/image.png"))
+            source: Qt.resolvedUrl(Quickshell.shellPath("assets/image.jpg"))
         }
     }
 }

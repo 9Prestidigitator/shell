@@ -26,21 +26,30 @@ Scope {
             mask: Region {
                 item: barContent
             }
-            implicitWidth: barContent.width
+            implicitWidth: 36
             property real contentWidth: 24
 
             Rectangle {
                 id: barContent
                 width: 36
-                color: "blue"
+                color: Qt.hsla(0.66, 0.05, 0.25, 0.85)
+                opacity: 0.8
+
                 anchors {
                     top: parent.top
                     bottom: parent.bottom
                     left: parent.left
+                    right: parent.right
+                    rightMargin: 0
+                    leftMargin: 6
+                    topMargin: 8
+                    bottomMargin: 8
                 }
+                radius: 18
+
                 ColumnLayout {
                     anchors {
-                        topMargin: 10
+                        topMargin: 4
                         top: parent.top
                         horizontalCenter: parent.horizontalCenter
                     }
