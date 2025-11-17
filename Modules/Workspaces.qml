@@ -8,10 +8,10 @@ Item {
     implicitHeight: layout.implicitHeight
 
     property int workspaceSize: 28
-    property int windowSize: 12
-    property int spacing: 4
+    property int windowSize: 16
+    property int spacing: 3
     property int windowSpacing: 3
-    property int padding: 2
+    property int padding: 1
 
     Column {
         id: layout
@@ -25,8 +25,8 @@ Item {
             Rectangle {
                 id: workspaceBlock
                 width: root.workspaceSize
-                height: Math.max(root.workspaceSize, windowColumn.height + 16)
-                radius: 15
+                height: Math.max(root.workspaceSize, windowColumn.height + 14)
+                radius: 16
 
                 color: modelData.isActive ? "red" : "green"
                 border.color: modelData.isFocused ? "#ffffff" : "transparent"
