@@ -8,7 +8,7 @@ Singleton {
     id: niriEvents
 
     property bool initialized: false
-    property bool debug: true
+    property bool debug: false
     property var workspaces: ({})
     property var windows: ({})
     property var sortedWorkspacesList: []
@@ -152,10 +152,8 @@ Singleton {
                 workspaces[wsId].windows = workspaces[wsId].windows.filter(w => w.id !== winData.id);
             }
             
-            // Add to the correct workspace
             if (workspaces[winData.workspace_id]) {
                 workspaces[winData.workspace_id].windows.push(window);
-                // Create new workspace object to trigger QML update
                 const ws = workspaces[winData.workspace_id];
                 workspaces[winData.workspace_id] = {
                     id: ws.id,

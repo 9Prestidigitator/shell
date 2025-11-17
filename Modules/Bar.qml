@@ -21,7 +21,7 @@ Scope {
             }
 
             color: "transparent"
-            // color: "white"
+
             WlrLayershell.layer: WlrLayer.Top
             mask: Region {
                 item: barContent
@@ -31,7 +31,7 @@ Scope {
 
             Rectangle {
                 id: barContent
-                width: 40
+                width: 36
                 color: "blue"
                 anchors {
                     top: parent.top

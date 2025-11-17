@@ -5,9 +5,11 @@
 const windowIconConfig = {
     // Default icon for unmatched windows
     defaultIcon: "•",
+
+    urgentIcon: "!",
     
     // Font settings
-    fontFamily: "nerd",
+    fontFamily: "Hack Nerd Font",
     fontSize: 12,
     
     // Pattern matching rules (regex pattern -> icon character)
