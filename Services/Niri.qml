@@ -155,10 +155,17 @@ Singleton {
             // Add to the correct workspace
             if (workspaces[winData.workspace_id]) {
                 workspaces[winData.workspace_id].windows.push(window);
-                // Create new array reference to trigger QML update
+                // Create new workspace object to trigger QML update
+                const ws = workspaces[winData.workspace_id];
                 workspaces[winData.workspace_id] = {
-                    ...workspaces[winData.workspace_id],
-                    windows: [...workspaces[winData.workspace_id].windows]
+                    id: ws.id,
+                    idx: ws.idx,
+                    name: ws.name,
+                    output: ws.output,
+                    isActive: ws.isActive,
+                    isFocused: ws.isFocused,
+                    activeWindowId: ws.activeWindowId,
+                    windows: workspaces[winData.workspace_id].windows.slice()
                 };
             }
             
